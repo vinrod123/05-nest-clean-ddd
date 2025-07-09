@@ -7,6 +7,7 @@ import {ResourceNotFoundError} from "@/domain/forum/application/use-cases/errors
 import {NotAllowedError} from "@/domain/forum/application/use-cases/errors/not-allowed";
 import {AnswersRepository} from "@/domain/forum/application/repositories/answers.repository";
 import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import { Injectable } from '@nestjs/common';
 
 interface EditAnswerUseCaseRequest {
     authorId: string
@@ -22,6 +23,7 @@ type EditAnswerUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class EditAnswerUseCase {
     constructor(
         private answersRepository: AnswersRepository,

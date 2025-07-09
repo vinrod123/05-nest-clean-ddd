@@ -1,18 +1,44 @@
-import {Question, QuestionProps} from "@/domain/forum/enterprise/entities/question";
-import {Slug} from "@/domain/forum/enterprise/entities/value-objects/slug";
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
-import {faker} from '@faker-js/faker'
+import { faker } from '@faker-js/faker'
 
-export function makeQuestion(override: Partial<QuestionProps> = {}, id?: UniqueEntityID){
-    const question = Question.create({
-        title: faker.lorem.sentence(),
-        slug: Slug.create('example-question'),
-        authorId: new UniqueEntityID('1'),
-        content: faker.lorem.text(),
-        ...override
-    },
-        id,
-        )
+import {
+    Question,
+    QuestionProps,
+} from '@/domain/forum/enterprise/entities/question'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { PrismaQuestionMapper } from '@/infra/database/prisma/mappers/prisma-question-mapper'
+import { Injectable } from '@nestjs/common'
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+
+export function makeQuestion(
+  override: Partial<QuestionProps> = {},
+  id?: UniqueEntityID,
+) {
+    const question = Question.create(
+      {
+          authorId: new UniqueEntityID(),
+          title: faker.lorem.sentence(),
+          content: faker.lorem.text(),
+          ...override,
+      },
+      id,
+    )
 
     return question
+}
+
+@Injectable()
+export class QuestionFactory {
+    constructor(private prisma: PrismaService) {}
+
+    async makePrismaQuestion(
+      data: Partial<QuestionProps> = {},
+    ): Promise<Question> {
+        const question = makeQuestion(data)
+
+        await this.prisma.question.create({
+            data: PrismaQuestionMapper.toPrisma(question),
+        })
+
+        return question
+    }
 }

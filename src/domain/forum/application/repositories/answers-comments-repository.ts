@@ -1,11 +1,14 @@
+import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment';
+import { PaginationParams } from '@/core/repositories/pagination-params';
 
-import {AnswerComment} from "@/domain/forum/enterprise/entities/answer-comment";
-import {PaginationParams} from "@/core/repositories/pagination-params";
-import {QuestionComment} from "@/domain/forum/enterprise/entities/question-comment";
 
-export interface AnswersCommentsRepository{
-    findById(id: string) : Promise<AnswerComment | null>
-    create(answersComment: AnswerComment) : Promise<void>
-    delete(answersComment: AnswerComment) : Promise<void>
-    findManyByAnswerId(id: string, params: PaginationParams) : Promise<AnswerComment[]>
+export abstract class AnswerCommentsRepository {
+    abstract findById(id: string): Promise<AnswerComment | null>
+    abstract findManyByAnswerId(
+      answerId: string,
+      params: PaginationParams,
+    ): Promise<AnswerComment[]>
+
+    abstract create(answerComment: AnswerComment): Promise<void>
+    abstract delete(answerComment: AnswerComment): Promise<void>
 }

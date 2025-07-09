@@ -1,19 +1,35 @@
-import { Attachment as PrismaAttachment } from '@prisma/client'
-import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
+import { Comment as PrismaComment, Prisma } from '@prisma/client'
+import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
 import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
 
-export class PrismaQuestionAttachmentMapper {
-  static toDomain(raw: PrismaAttachment): QuestionAttachment {
+export class PrismaQuestionCommentMapper {
+  static toDomain(raw: PrismaComment): QuestionComment {
     if (!raw.questionId) {
-      throw new Error('Invalid attachment type.')
+      throw new Error('Invalid comment type.')
     }
 
-    return QuestionAttachment.create(
+    return QuestionComment.create(
       {
-        attachmentId: new UniqueEntityID(raw.id),
+        content: raw.content,
+        authorId: new UniqueEntityID(raw.authorId),
         questionId: new UniqueEntityID(raw.questionId),
+        createdAt: raw.createdAt,
+        updatedAt: raw.updatedAt,
       },
       new UniqueEntityID(raw.id),
     )
+  }
+
+  static toPrisma(
+    questionComment: QuestionComment,
+  ): Prisma.CommentUncheckedCreateInput {
+    return {
+      id: questionComment.id.toString(),
+      authorId: questionComment.authorId.toString(),
+      questionId: questionComment.questionId.toString(),
+      content: questionComment.content,
+      createdAt: questionComment.createdAt,
+      updatedAt: questionComment.updatedAt,
+    }
   }
 }

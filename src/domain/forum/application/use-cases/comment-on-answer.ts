@@ -1,10 +1,11 @@
 
 import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
 import {AnswersRepository} from "@/domain/forum/application/repositories/answers.repository";
-import {AnswersCommentsRepository} from "@/domain/forum/application/repositories/answers-comments-repository";
 import {AnswerComment} from "@/domain/forum/enterprise/entities/answer-comment";
 import {Either, left, right} from "@/core/either";
 import {ResourceNotFoundError} from "@/domain/forum/application/use-cases/errors/resource-not-found";
+import { Injectable } from '@nestjs/common';
+import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answers-comments-repository';
 
 interface CommentOnAnswerUseCaseRequest{
     authorId: string
@@ -16,10 +17,11 @@ type CommentOnAnswerUseCaseResponse = Either<ResourceNotFoundError,{
     answerComment: AnswerComment
 }>
 
+@Injectable()
 export class CommentOnAnswerUseCase{
     constructor(
         private answersRepository: AnswersRepository,
-        private answersCommentsRepository: AnswersCommentsRepository
+        private answersCommentsRepository: AnswerCommentsRepository
     ){}
 
     async execute({
