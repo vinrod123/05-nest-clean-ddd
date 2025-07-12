@@ -46,19 +46,31 @@ describe('Edit question (E2E)', () => {
       .put(`/questions/${questionId}`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
-        title: 'New title',
-        content: 'New content',
+        title: 'New title 4',
+        content: 'New content 4',
       })
 
     expect(response.statusCode).toBe(204)
 
     const questionOnDatabase = await prisma.question.findFirst({
       where: {
-        title: 'New title',
-        content: 'New content',
+        title: 'New title 4',
+        content: 'New content 4',
       },
     })
 
     expect(questionOnDatabase).toBeTruthy()
   })
+
+  afterAll(async () => {
+    await prisma.$transaction([
+      prisma.attachment.deleteMany(),
+      prisma.comment.deleteMany(),
+      prisma.answer.deleteMany(),
+      prisma.question.deleteMany(),
+      prisma.user.deleteMany(),
+    ]);
+
+    await app.close();
+  });
 })

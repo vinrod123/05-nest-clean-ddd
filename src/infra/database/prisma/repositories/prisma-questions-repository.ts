@@ -17,6 +17,8 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
       },
     })
 
+    console.log("QUESTION", question)
+
     if (!question) {
       return null
     }
@@ -53,12 +55,13 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
   async save(question: Question): Promise<void> {
     const data = PrismaQuestionMapper.toPrisma(question)
 
-    await this.prisma.question.update({
+    const resposta = await this.prisma.question.update({
       where: {
         id: question.id.toString(),
       },
       data,
     })
+    console.log("resposta do save", resposta)
   }
 
   async create(question: Question): Promise<void> {
