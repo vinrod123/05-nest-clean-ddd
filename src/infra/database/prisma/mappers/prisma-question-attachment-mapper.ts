@@ -1,25 +1,38 @@
 import { Prisma, Attachment as PrismaAttachment } from '@prisma/client'
-import { Attachment } from '@/domain/forum/enterprise/entities/attachment'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id';
+import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
 
-export class PrismaAttachmentMapper {
-  static toDomain(raw: PrismaAttachment): Attachment {
-    return Attachment.create(
+export class PrismaQuestionAttachmentMapper {
+  static toDomain(raw: PrismaAttachment): QuestionAttachment {
+    if (!raw.questionId) {
+      throw new Error('Invalid attachment type.')
+    }
+
+    return QuestionAttachment.create(
       {
-        title: raw.title,
-        url: raw.url,
+        attachmentId: new UniqueEntityID(raw.id),
+        questionId: new UniqueEntityID(raw.questionId),
       },
-      new UniqueEntityId(raw.id),
+      new UniqueEntityID(raw.id),
     )
   }
 
-  static toPrisma(
-    attachment: Attachment,
-  ): Prisma.AttachmentUncheckedCreateInput {
+  static toPrismaUpdateMany(
+    attachments: QuestionAttachment[],
+  ): Prisma.AttachmentUpdateManyArgs {
+    const attachmentIds = attachments.map((attachment) => {
+      return attachment.attachmentId.toString()
+    })
+
     return {
-      id: attachment.id.toString(),
-      title: attachment.title,
-      url: attachment.url,
+      where: {
+        id: {
+          in: attachmentIds,
+        },
+      },
+      data: {
+        questionId: attachments[0].questionId.toString(),
+      },
     }
   }
 }

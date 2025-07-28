@@ -3,7 +3,7 @@ import { makeQuestionComment } from 'test/factories/make-question-comment'
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 import { makeStudent } from 'test/factories/make-student'
 import { FetchQuestionCommentsUseCase } from "@/domain/forum/application/use-cases/fetch-questions-comments";
-import { UniqueEntityId } from "@/core/entities/unique-entity-id";
+import { UniqueEntityID } from "@/core/entities/unique-entity-i-d";
 import {
     InMemoryQuestionCommentsRepository
 } from '../../../../../test/repositories/in-memory-question-comments-repository';
@@ -27,17 +27,17 @@ describe('Fetch Question Comments', () => {
         inMemoryStudentsRepository.items.push(student)
 
         const comment1 = makeQuestionComment({
-            questionId: new UniqueEntityId('question-1'),
+            questionId: new UniqueEntityID('question-1'),
             authorId: student.id,
         })
 
         const comment2 = makeQuestionComment({
-            questionId: new UniqueEntityId('question-1'),
+            questionId: new UniqueEntityID('question-1'),
             authorId: student.id,
         })
 
         const comment3 = makeQuestionComment({
-            questionId: new UniqueEntityId('question-1'),
+            questionId: new UniqueEntityID('question-1'),
             authorId: student.id,
         })
 
@@ -77,7 +77,7 @@ describe('Fetch Question Comments', () => {
         for (let i = 1; i <= 22; i++) {
             await inMemoryQuestionCommentsRepository.create(
               makeQuestionComment({
-                  questionId: new UniqueEntityId('question-1'),
+                  questionId: new UniqueEntityID('question-1'),
                   authorId: student.id,
               }),
             )

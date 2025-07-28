@@ -1,7 +1,7 @@
 import { ReadNotificationUseCase } from './read-notification'
 import {makeNotification} from "../../../../../test/factories/make-notifications";
 import { InMemoryNotificationsRepository } from 'test/repositories/in-memory-notifications-respository';
-import {UniqueEntityId} from "@/core/entities/unique-entity-id";
+import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
 import {NotAllowedError} from "@/domain/forum/application/use-cases/errors/not-allowed";
 
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository
@@ -31,7 +31,7 @@ describe('Send Notification', () => {
 
     it('should not be able to read a notification from another user', async () => {
         const notification = makeNotification({
-            recipientId: new UniqueEntityId('recipient-1'),
+            recipientId: new UniqueEntityID('recipient-1'),
         })
 
         inMemoryNotificationsRepository.create(notification)

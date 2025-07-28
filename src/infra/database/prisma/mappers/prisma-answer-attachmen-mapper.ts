@@ -1,6 +1,6 @@
 import { Attachment as PrismaAttachment } from '@prisma/client'
 import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-attachment'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id';
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
 
 export class PrismaAnswerAttachmentMapper {
   static toDomain(raw: PrismaAttachment): AnswerAttachment {
@@ -10,10 +10,10 @@ export class PrismaAnswerAttachmentMapper {
 
     return AnswerAttachment.create(
       {
-        attachmentId: new UniqueEntityId(raw.id),
-        answerId: new UniqueEntityId(raw.answerId),
+        attachmentId: new UniqueEntityID(raw.id),
+        answerId: new UniqueEntityID(raw.answerId),
       },
-      new UniqueEntityId(raw.id),
+      new UniqueEntityID(raw.id),
     )
   }
 

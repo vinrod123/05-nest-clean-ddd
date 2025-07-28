@@ -1,7 +1,7 @@
 
 import {beforeEach, describe, expect} from "vitest";
 import {InMemoryQuestionsRepository} from "../../../../../test/repositories/in-memory-questions-repository";
-import {UniqueEntityId} from "@/core/entities/unique-entity-id";
+import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
 import {makeQuestion} from "../../../../../test/factories/make-question";
 import {DeleteAnswerUseCase} from "@/domain/forum/application/use-cases/delete-answer";
 import {AnswersRepository} from "@/domain/forum/application/repositories/answers.repository";
@@ -28,18 +28,18 @@ describe('Delete answer by id', () => {
 
     it('should be able to delete a answer by id', async () =>{
         const newAnswer = makeAnswer({
-            authorId: new UniqueEntityId('author-1')
-        }, new UniqueEntityId('answer-1'))
+            authorId: new UniqueEntityID('author-1')
+        }, new UniqueEntityID('answer-1'))
         await inMemoryAnswersRepository.create(newAnswer)
 
         inMemoryAnswerAttachmentRepository.items.push(
             makeAnswerAttachment({
                 answerId: newAnswer.id,
-                attachmentId: new UniqueEntityId('1')
+                attachmentId: new UniqueEntityID('1')
             }),
             makeAnswerAttachment({
                 answerId: newAnswer.id,
-                attachmentId: new UniqueEntityId('2')
+                attachmentId: new UniqueEntityID('2')
             })
         )
 
@@ -54,8 +54,8 @@ describe('Delete answer by id', () => {
 
     it('should not be able to delete a answer from another user', async () =>{
         const newAnswer = makeAnswer({
-            authorId: new UniqueEntityId('author-1')
-        }, new UniqueEntityId('answer-1'))
+            authorId: new UniqueEntityID('author-1')
+        }, new UniqueEntityID('answer-1'))
         await  inMemoryAnswersRepository.create(newAnswer)
 
 

@@ -1,4 +1,4 @@
-import {UniqueEntityId} from "@/core/entities/unique-entity-id";
+import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
 import {Optional} from "@/core/types/optional";
 import {AnswerAttachmentList} from "@/domain/forum/enterprise/entities/answer-attachment-list";
 import {AggregateRoot} from "@/core/entities/aggregate-root";
@@ -7,8 +7,8 @@ import {AnswerCreatedEvent} from "@/domain/forum/enterprise/events/answer-create
 
 export interface AnswerProps{
     content: string,
-    authorId: UniqueEntityId,
-    questionId: UniqueEntityId,
+    authorId: UniqueEntityID,
+    questionId: UniqueEntityID,
     attachments: AnswerAttachmentList,
     createdAt: Date,
     updatedAt?: Date | null
@@ -57,7 +57,7 @@ export class Answer extends AggregateRoot<AnswerProps> {
         this.props.updatedAt = new Date()
     }
 
-    static create(props: Optional<AnswerProps, 'createdAt' | 'attachments'>, id?: UniqueEntityId){
+    static create(props: Optional<AnswerProps, 'createdAt' | 'attachments'>, id?: UniqueEntityID){
         const answer = new Answer({
             ...props,
             attachments: props.attachments ?? new AnswerAttachmentList(),

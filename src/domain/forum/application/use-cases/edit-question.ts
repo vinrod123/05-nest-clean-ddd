@@ -7,7 +7,7 @@ import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-
 import { Injectable } from '@nestjs/common'
 import { ResourceNotFoundError } from '@/domain/forum/application/use-cases/errors/resource-not-found';
 import { NotAllowedError } from "@/domain/forum/application/use-cases/errors/not-allowed";
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d'
 
 interface EditQuestionUseCaseRequest {
     authorId: string
@@ -57,7 +57,7 @@ export class EditQuestionUseCase {
 
         const questionAttachments = attachmentsIds.map((attachmentId) => {
             return QuestionAttachment.create({
-                attachmentId: new UniqueEntityId(attachmentId),
+                attachmentId: new UniqueEntityID(attachmentId),
                 questionId: question.id,
             })
         })

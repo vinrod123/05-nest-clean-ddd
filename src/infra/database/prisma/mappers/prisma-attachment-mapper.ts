@@ -1,6 +1,6 @@
 import { Prisma, Attachment as PrismaAttachment } from '@prisma/client'
 import { Attachment } from '@/domain/forum/enterprise/entities/attachment'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id';
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
 
 export class PrismaAttachmentMapper {
   static toDomain(raw: PrismaAttachment): Attachment {
@@ -9,7 +9,7 @@ export class PrismaAttachmentMapper {
         title: raw.title,
         url: raw.url,
       },
-      new UniqueEntityId(raw.id),
+      new UniqueEntityID(raw.id),
     )
   }
 

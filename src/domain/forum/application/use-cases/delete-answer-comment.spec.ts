@@ -2,7 +2,7 @@
 import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment'
 import { makeAnswerComment } from 'test/factories/make-answer-comment'
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id';
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
 import {
     InMemoryAnswerCommentsRepository
 } from '../../../../../test/repositories/in-memory-answers-comments-repository';
@@ -37,7 +37,7 @@ describe('Delete Answer Comment', () => {
 
     it('should not be able to delete another user answer comment', async () => {
         const answerComment = makeAnswerComment({
-            authorId: new UniqueEntityId('author-1'),
+            authorId: new UniqueEntityID('author-1'),
         })
 
         await inMemoryAnswerCommentsRepository.create(answerComment)

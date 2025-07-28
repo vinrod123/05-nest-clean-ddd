@@ -1,6 +1,6 @@
 import {QuestionsRepository} from "@/domain/forum/application/repositories/questions-repository";
 import {Question} from "@/domain/forum/enterprise/entities/question";
-import {UniqueEntityId} from "@/core/entities/unique-entity-id";
+import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
 import {Either, right} from "@/core/either";
 import { Injectable } from '@nestjs/common';
 

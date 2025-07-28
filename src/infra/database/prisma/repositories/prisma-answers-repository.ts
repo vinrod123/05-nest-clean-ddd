@@ -2,9 +2,10 @@ import { PaginationParams } from '@/core/repositories/pagination-params'
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma.service'
+import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository'
+import { DomainEvents } from '@/core/events/domain-events'
 import { PrismaAnswerMapper } from '@/infra/database/prisma/mappers/prism-answer-mapper';
 import { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository';
-import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository';
 
 @Injectable()
 export class PrismaAnswersRepository implements AnswersRepository {
@@ -56,6 +57,7 @@ export class PrismaAnswersRepository implements AnswersRepository {
       answer.attachments.getItems(),
     )
 
+    DomainEvents.dispatchEventsForAggregate(answer.id)
   }
 
   async save(answer: Answer): Promise<void> {
@@ -75,6 +77,8 @@ export class PrismaAnswersRepository implements AnswersRepository {
         answer.attachments.getRemovedItems(),
       ),
     ])
+
+    DomainEvents.dispatchEventsForAggregate(answer.id)
   }
 
   async delete(answer: Answer): Promise<void> {

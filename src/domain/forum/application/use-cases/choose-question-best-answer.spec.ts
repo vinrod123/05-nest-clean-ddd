@@ -8,7 +8,7 @@ import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memo
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 import { InMemoryAnswersRepository } from "../../../../../test/repositories/in-memory-answers.repository";
 import { InMemoryAttachmentsRepository } from 'test/repositories/in-memory-attachment-repository'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id';
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
 import { NotAllowedError } from '@/domain/forum/application/use-cases/errors/not-allowed';
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
@@ -62,7 +62,7 @@ describe('Choose Question Best Answer', () => {
 
     it('should not be able to to choose another user question best answer', async () => {
         const question = makeQuestion({
-            authorId: new UniqueEntityId('author-1'),
+            authorId: new UniqueEntityID('author-1'),
         })
 
         const answer = makeAnswer({
