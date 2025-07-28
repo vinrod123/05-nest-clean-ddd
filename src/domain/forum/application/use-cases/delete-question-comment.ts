@@ -1,6 +1,6 @@
 import {QuestionsRepository} from "@/domain/forum/application/repositories/questions-repository";
 import {Question} from "@/domain/forum/enterprise/entities/question";
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 import {QuestionCommentsRepository} from "@/domain/forum/application/repositories/question-comments-repository";
 import {QuestionComment} from "@/domain/forum/enterprise/entities/question-comment";
 import {Either, left, right} from "@/core/either";

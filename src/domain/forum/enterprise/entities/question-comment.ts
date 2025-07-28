@@ -1,10 +1,10 @@
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 import {Optional} from "@/core/types/optional";
 import {Comment, CommentProps} from "@/domain/forum/enterprise/entities/comment";
 
 
 export interface QuestionCommentProps extends CommentProps{
-    questionId: UniqueEntityID
+    questionId: UniqueEntityId
 }
 export class QuestionComment extends Comment<QuestionCommentProps>{
 
@@ -13,7 +13,7 @@ export class QuestionComment extends Comment<QuestionCommentProps>{
     }
 
 
-    static create(props: Optional<QuestionCommentProps, 'createdAt'>, id?: UniqueEntityID){
+    static create(props: Optional<QuestionCommentProps, 'createdAt'>, id?: UniqueEntityId){
         const questionComment = new QuestionComment({
             ...props,
             createdAt: new Date()

@@ -6,7 +6,7 @@ import request from 'supertest'
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { AppModule } from '../../app.module';
 import { StudentFactory } from '../../../../test/factories/make-student';
-import { DatabaseModule } from '@/infra/database/prisma/repositories/database.module';
+import { DatabaseModule } from '@/infra/database/database.module';
 import { AttachmentFactory } from '../../../../test/factories/make-attachment';
 
 describe('Create question (E2E)', () => {

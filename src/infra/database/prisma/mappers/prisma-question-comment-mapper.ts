@@ -1,6 +1,6 @@
 import { Comment as PrismaComment, Prisma } from '@prisma/client'
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
 export class PrismaQuestionCommentMapper {
   static toDomain(raw: PrismaComment): QuestionComment {
@@ -11,12 +11,12 @@ export class PrismaQuestionCommentMapper {
     return QuestionComment.create(
       {
         content: raw.content,
-        authorId: new UniqueEntityID(raw.authorId),
-        questionId: new UniqueEntityID(raw.questionId),
+        authorId: new UniqueEntityId(raw.authorId),
+        questionId: new UniqueEntityId(raw.questionId),
         createdAt: raw.createdAt,
         updatedAt: raw.updatedAt,
       },
-      new UniqueEntityID(raw.id),
+      new UniqueEntityId(raw.id),
     )
   }
 

@@ -1,5 +1,5 @@
 import {Entity} from "@/core/entities/entity";
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 
 
 interface InstructorProps{
@@ -8,7 +8,7 @@ interface InstructorProps{
 }
 export class Instructor extends Entity<InstructorProps>{
 
-    static create(props: InstructorProps, id?: UniqueEntityID){
+    static create(props: InstructorProps, id?: UniqueEntityId){
         const student = new Instructor(props, id)
 
 

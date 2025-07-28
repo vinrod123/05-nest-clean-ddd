@@ -2,7 +2,7 @@
 import { AnswerQuestionUseCase } from '@/domain/forum/application/use-cases/answer-question'
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
 import {InMemoryAnswersRepository} from "../../../../../test/repositories/in-memory-answers.repository";
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
@@ -33,8 +33,8 @@ describe('Create Answer', () => {
         ).toHaveLength(2)
         expect(inMemoryAnswersRepository.items[0].attachments.currentItems).toEqual(
             [
-                expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
-                expect.objectContaining({ attachmentId: new UniqueEntityID('2') }),
+                expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
+                expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),
             ],
         )
     })
@@ -52,10 +52,10 @@ describe('Create Answer', () => {
         expect(inMemoryAnswerAttachmentsRepository.items).toEqual(
           expect.arrayContaining([
               expect.objectContaining({
-                  attachmentId: new UniqueEntityID('1'),
+                  attachmentId: new UniqueEntityId('1'),
               }),
               expect.objectContaining({
-                  attachmentId: new UniqueEntityID('1'),
+                  attachmentId: new UniqueEntityId('1'),
               }),
           ]),
         )

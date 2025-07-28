@@ -8,7 +8,7 @@ import { AnswerFactory } from 'test/factories/make-answer'
 import { AttachmentFactory } from 'test/factories/make-attachment'
 import { QuestionFactory } from 'test/factories/make-question'
 import { StudentFactory } from 'test/factories/make-student'
-import { DatabaseModule } from '@/infra/database/prisma/repositories/database.module';
+import { DatabaseModule } from '@/infra/database/database.module';
 import { AnswerAttachmentFactory } from '../../../../test/factories/make-answer-attachment';
 
 describe('Edit answer (E2E)', () => {

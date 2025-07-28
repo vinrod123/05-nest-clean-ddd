@@ -12,6 +12,7 @@ import { EnvModule } from '@/infra/env/env.module';
   }),
   AuthModule,
   HttpModule,
-  EnvModule]
+  EnvModule,
+  EventsModule]
 })
 export class AppModule {}

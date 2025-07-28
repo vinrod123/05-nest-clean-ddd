@@ -1,4 +1,4 @@
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 import {faker} from '@faker-js/faker'
 import {QuestionComment, QuestionCommentProps} from "@/domain/forum/enterprise/entities/question-comment";
 import { Injectable } from '@nestjs/common';
@@ -7,12 +7,12 @@ import { PrismaQuestionCommentMapper } from '@/infra/database/prisma/mappers/pri
 
 export function makeQuestionComment(
   override: Partial<QuestionCommentProps> = {},
-  id?: UniqueEntityID,
+  id?: UniqueEntityId,
 ) {
   const question = QuestionComment.create(
     {
-      authorId: new UniqueEntityID(),
-      questionId: new UniqueEntityID(),
+      authorId: new UniqueEntityId(),
+      questionId: new UniqueEntityId(),
       content: faker.lorem.text(),
       ...override,
     },

@@ -6,16 +6,16 @@ import {
 } from '@/domain/forum/enterprise/entities/question-attachment'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { Injectable } from '@nestjs/common'
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
 export function makeQuestionAttachment(
   override: Partial<QuestionAttachmentProps> = {},
-  id?: UniqueEntityID,
+  id?: UniqueEntityId,
 ) {
   const questionAttachment = QuestionAttachment.create(
     {
-      questionId: new UniqueEntityID(),
-      attachmentId: new UniqueEntityID(),
+      questionId: new UniqueEntityId(),
+      attachmentId: new UniqueEntityId(),
       ...override,
     },
     id,

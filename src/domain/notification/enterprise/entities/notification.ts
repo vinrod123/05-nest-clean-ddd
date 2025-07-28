@@ -1,13 +1,13 @@
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 import {Entity} from "@/core/entities/entity";
 import {Optional} from "@/core/types/optional";
 
 
 export interface NotificationProps {
-    recipientId: UniqueEntityID
+    recipientId: UniqueEntityId
     title: string
     content: string
-    readAt?: Date
+    readAt?: Date | null
     createdAt: Date
 }
 
@@ -38,7 +38,7 @@ export class Notification extends Entity<NotificationProps> {
 
     static create(
         props: Optional<NotificationProps, 'createdAt'>,
-        id?: UniqueEntityID,
+        id?: UniqueEntityId,
     ) {
         const notification = new Notification(
             {

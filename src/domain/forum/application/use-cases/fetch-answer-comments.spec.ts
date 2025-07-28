@@ -4,7 +4,7 @@ import { makeAnswerComment } from 'test/factories/make-answer-comment'
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 import { makeStudent } from 'test/factories/make-student'
 
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import {
     InMemoryAnswerCommentsRepository
 } from '../../../../../test/repositories/in-memory-answers-comments-repository';
@@ -28,17 +28,17 @@ describe('Fetch Answer Comments', () => {
         inMemoryStudentsRepository.items.push(student)
 
         const comment1 = makeAnswerComment({
-            answerId: new UniqueEntityID('answer-1'),
+            answerId: new UniqueEntityId('answer-1'),
             authorId: student.id,
         })
 
         const comment2 = makeAnswerComment({
-            answerId: new UniqueEntityID('answer-1'),
+            answerId: new UniqueEntityId('answer-1'),
             authorId: student.id,
         })
 
         const comment3 = makeAnswerComment({
-            answerId: new UniqueEntityID('answer-1'),
+            answerId: new UniqueEntityId('answer-1'),
             authorId: student.id,
         })
 
@@ -78,7 +78,7 @@ describe('Fetch Answer Comments', () => {
         for (let i = 1; i <= 22; i++) {
             await inMemoryAnswerCommentsRepository.create(
               makeAnswerComment({
-                  answerId: new UniqueEntityID('answer-1'),
+                  answerId: new UniqueEntityId('answer-1'),
                   authorId: student.id,
               }),
             )

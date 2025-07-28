@@ -4,7 +4,7 @@ import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questio
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 import { InMemoryAttachmentsRepository } from '../../../../../test/repositories/in-memory-attachment-repository';
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
@@ -42,8 +42,8 @@ describe('Create Question', () => {
         expect(
           inMemoryQuestionsRepository.items[0].attachments.currentItems,
         ).toEqual([
-            expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
-            expect.objectContaining({ attachmentId: new UniqueEntityID('2') }),
+            expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
+            expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),
         ])
     })
 
@@ -60,10 +60,10 @@ describe('Create Question', () => {
         expect(inMemoryQuestionAttachmentsRepository.items).toEqual(
           expect.arrayContaining([
               expect.objectContaining({
-                  attachmentId: new UniqueEntityID('1'),
+                  attachmentId: new UniqueEntityId('1'),
               }),
               expect.objectContaining({
-                  attachmentId: new UniqueEntityID('1'),
+                  attachmentId: new UniqueEntityId('1'),
               }),
           ]),
         )

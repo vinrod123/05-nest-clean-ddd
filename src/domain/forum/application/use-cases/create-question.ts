@@ -1,6 +1,6 @@
 import {QuestionsRepository} from "@/domain/forum/application/repositories/questions-repository";
 import {Question} from "@/domain/forum/enterprise/entities/question";
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 import {Either, right} from "@/core/either";
 import {QuestionAttachment} from "@/domain/forum/enterprise/entities/question-attachment";
 import {QuestionAttachmentList} from "@/domain/forum/enterprise/entities/question-attachment-list";
@@ -30,14 +30,14 @@ export class CreateQuestionUseCase{
         attachmentsIds } : CreateQuestionUseCaseRequest) : Promise<CreateQuestionUseCaseResponse>{
 
         const question = Question.create({
-            authorId: new UniqueEntityID(authorId),
+            authorId: new UniqueEntityId(authorId),
             title,
             content
         })
 
         const questionAttachments = attachmentsIds.map( attachmentId => {
             return QuestionAttachment.create({
-                attachmentId: new UniqueEntityID(attachmentId),
+                attachmentId: new UniqueEntityId(attachmentId),
                 questionId: question.id
             })
         })

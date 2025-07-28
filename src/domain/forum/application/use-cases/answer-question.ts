@@ -3,7 +3,7 @@ import { AnswerAttachment } from '../../enterprise/entities/answer-attachment'
 import { AnswerAttachmentList } from '../../enterprise/entities/answer-attachment-list'
 import {Either, right} from "@/core/either";
 import {AnswersRepository} from "@/domain/forum/application/repositories/answers.repository";
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 import { Injectable } from '@nestjs/common';
 
 interface AnswerQuestionUseCaseRequest {
@@ -32,13 +32,13 @@ export class AnswerQuestionUseCase {
                   }: AnswerQuestionUseCaseRequest): Promise<AnswerQuestionUseCaseResponse> {
         const answer = Answer.create({
             content,
-            authorId: new UniqueEntityID(authorId),
-            questionId: new UniqueEntityID(questionId),
+            authorId: new UniqueEntityId(authorId),
+            questionId: new UniqueEntityId(questionId),
         })
 
         const answerAttachments = attachmentsIds.map((attachmentId) => {
             return AnswerAttachment.create({
-                attachmentId: new UniqueEntityID(attachmentId),
+                attachmentId: new UniqueEntityId(attachmentId),
                 answerId: answer.id,
             })
         })

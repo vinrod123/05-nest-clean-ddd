@@ -7,7 +7,7 @@ import request from 'supertest'
 import { AnswerFactory } from 'test/factories/make-answer'
 import { QuestionFactory } from 'test/factories/make-question'
 import { StudentFactory } from 'test/factories/make-student'
-import { DatabaseModule } from '@/infra/database/prisma/repositories/database.module';
+import { DatabaseModule } from '@/infra/database/database.module';
 
 describe('Choose question best answer (E2E)', () => {
   let app: INestApplication

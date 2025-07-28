@@ -4,7 +4,7 @@ import { makeQuestion } from 'test/factories/make-question'
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 import { InMemoryAttachmentsRepository } from '../../../../../test/repositories/in-memory-attachment-repository';
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { makeQuestionAttachment } from '../../../../../test/factories/make-question-attachment';
 import { NotAllowedError } from '@/domain/forum/application/use-cases/errors/not-allowed';
 
@@ -32,9 +32,9 @@ describe('Delete Question', () => {
     it('should be able to delete a question', async () => {
         const newQuestion = makeQuestion(
           {
-              authorId: new UniqueEntityID('author-1'),
+              authorId: new UniqueEntityId('author-1'),
           },
-          new UniqueEntityID('question-1'),
+          new UniqueEntityId('question-1'),
         )
 
         await inMemoryQuestionsRepository.create(newQuestion)
@@ -42,11 +42,11 @@ describe('Delete Question', () => {
         inMemoryQuestionAttachmentsRepository.items.push(
           makeQuestionAttachment({
               questionId: newQuestion.id,
-              attachmentId: new UniqueEntityID('1'),
+              attachmentId: new UniqueEntityId('1'),
           }),
           makeQuestionAttachment({
               questionId: newQuestion.id,
-              attachmentId: new UniqueEntityID('2'),
+              attachmentId: new UniqueEntityId('2'),
           }),
         )
 
@@ -62,9 +62,9 @@ describe('Delete Question', () => {
     it('should not be able to delete a question from another user', async () => {
         const newQuestion = makeQuestion(
           {
-              authorId: new UniqueEntityID('author-1'),
+              authorId: new UniqueEntityId('author-1'),
           },
-          new UniqueEntityID('question-1'),
+          new UniqueEntityId('question-1'),
         )
 
         await inMemoryQuestionsRepository.create(newQuestion)

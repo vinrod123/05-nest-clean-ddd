@@ -1,4 +1,4 @@
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 import {Slug} from "@/domain/forum/enterprise/entities/value-objects/slug";
 import dayjs from "dayjs";
 import {Optional} from "@/core/types/optional";
@@ -9,10 +9,10 @@ import { QuestionBestAnswerChosenEvent } from '@/domain/forum/enterprise/events/
 export interface QuestionProps{
     title: string,
     content: string,
-    authorId: UniqueEntityID,
+    authorId: UniqueEntityId,
     attachments: QuestionAttachmentList,
     slug: Slug,
-    bestAnswerId?: UniqueEntityID | null,
+    bestAnswerId?: UniqueEntityId | null,
     createdAt: Date,
     updatedAt?: Date | null
 }
@@ -57,7 +57,7 @@ export class Question  extends AggregateRoot<QuestionProps>{
         this.touch()
     }
 
-    set bestAnswerId(bestAnswerId: UniqueEntityID | undefined | null) {
+    set bestAnswerId(bestAnswerId: UniqueEntityId | undefined | null) {
         if (bestAnswerId === undefined || bestAnswerId === null) {
             return
         }
@@ -86,7 +86,7 @@ export class Question  extends AggregateRoot<QuestionProps>{
         return dayjs().diff(this.createdAt, 'days') <= 3
     }
 
-    static create(props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>, id?: UniqueEntityID){
+    static create(props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>, id?: UniqueEntityId){
         const question = new Question({
             ...props,
             slug: props.slug ?? Slug.createFromText(props.title),

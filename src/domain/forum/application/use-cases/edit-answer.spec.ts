@@ -1,7 +1,7 @@
 import { EditAnswerUseCase } from './edit-answer'
 import { makeAnswer } from 'test/factories/make-answer'
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
+import {UniqueEntityId} from "@/core/entities/unique-entity-id";
 import {InMemoryAnswersRepository} from "../../../../../test/repositories/in-memory-answers.repository";
 import {makeAnswerAttachment} from "../../../../../test/factories/make-answer-attachment";
 import {NotAllowedError} from "@/domain/forum/application/use-cases/errors/not-allowed";
@@ -27,9 +27,9 @@ describe('Edit Answer', () => {
     it('should be able to edit a answer', async () => {
         const newAnswer = makeAnswer(
             {
-                authorId: new UniqueEntityID('author-1'),
+                authorId: new UniqueEntityId('author-1'),
             },
-            new UniqueEntityID('answer-1'),
+            new UniqueEntityId('answer-1'),
         )
 
         await inMemoryAnswersRepository.create(newAnswer)
@@ -37,11 +37,11 @@ describe('Edit Answer', () => {
         inMemoryAnswerAttachmentsRepository.items.push(
             makeAnswerAttachment({
                 answerId: newAnswer.id,
-                attachmentId: new UniqueEntityID('1'),
+                attachmentId: new UniqueEntityId('1'),
             }),
             makeAnswerAttachment({
                 answerId: newAnswer.id,
-                attachmentId: new UniqueEntityID('2'),
+                attachmentId: new UniqueEntityId('2'),
             }),
         )
 
@@ -61,8 +61,8 @@ describe('Edit Answer', () => {
         ).toHaveLength(2)
         expect(inMemoryAnswersRepository.items[0].attachments.currentItems).toEqual(
             [
-                expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
-                expect.objectContaining({ attachmentId: new UniqueEntityID('3') }),
+                expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
+                expect.objectContaining({ attachmentId: new UniqueEntityId('3') }),
             ],
         )
     })
@@ -70,9 +70,9 @@ describe('Edit Answer', () => {
     it('should not be able to edit a answer from another user', async () => {
         const newAnswer = makeAnswer(
             {
-                authorId: new UniqueEntityID('author-1'),
+                authorId: new UniqueEntityId('author-1'),
             },
-            new UniqueEntityID('answer-1'),
+            new UniqueEntityId('answer-1'),
         )
 
         await inMemoryAnswersRepository.create(newAnswer)
@@ -91,9 +91,9 @@ describe('Edit Answer', () => {
     it('should sync new and removed attachment when editing an answer', async () => {
         const newAnswer = makeAnswer(
           {
-              authorId: new UniqueEntityID('author-1'),
+              authorId: new UniqueEntityId('author-1'),
           },
-          new UniqueEntityID('question-1'),
+          new UniqueEntityId('question-1'),
         )
 
         await inMemoryAnswersRepository.create(newAnswer)
@@ -101,11 +101,11 @@ describe('Edit Answer', () => {
         inMemoryAnswerAttachmentsRepository.items.push(
           makeAnswerAttachment({
               answerId: newAnswer.id,
-              attachmentId: new UniqueEntityID('1'),
+              attachmentId: new UniqueEntityId('1'),
           }),
           makeAnswerAttachment({
               answerId: newAnswer.id,
-              attachmentId: new UniqueEntityID('2'),
+              attachmentId: new UniqueEntityId('2'),
           }),
         )
 
@@ -121,10 +121,10 @@ describe('Edit Answer', () => {
         expect(inMemoryAnswerAttachmentsRepository.items).toEqual(
           expect.arrayContaining([
               expect.objectContaining({
-                  attachmentId: new UniqueEntityID('1'),
+                  attachmentId: new UniqueEntityId('1'),
               }),
               expect.objectContaining({
-                  attachmentId: new UniqueEntityID('3'),
+                  attachmentId: new UniqueEntityId('3'),
               }),
           ]),
         )

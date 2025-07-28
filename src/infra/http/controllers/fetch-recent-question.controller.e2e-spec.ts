@@ -6,7 +6,7 @@ import request from 'supertest'
 import { AppModule } from '../../app.module';
 import { StudentFactory } from "../../../../test/factories/make-student";
 import { QuestionFactory } from 'test/factories/make-question';
-import { DatabaseModule } from '@/infra/database/prisma/repositories/database.module';
+import { DatabaseModule } from '@/infra/database/database.module';
 
 describe('Fetch recent questions (E2E)', () => {
   let app: INestApplication

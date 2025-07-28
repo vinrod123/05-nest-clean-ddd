@@ -4,14 +4,14 @@ import {
   Student,
   StudentProps,
 } from '@/domain/forum/enterprise/entities/student'
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { PrismaStudentMapper } from '@/infra/database/prisma/mappers/prisma-student-mapper';
 
 export function makeStudent(
   override: Partial<StudentProps> = {},
-  id?: UniqueEntityID,
+  id?: UniqueEntityId,
 ) {
   const student = Student.create(
     {

@@ -2,17 +2,17 @@
 import { Slug } from './slug'
 import { Attachment } from '../attachment'
 import { ValueObject } from '@/core/entities/value-objects';
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
 export interface QuestionDetailsProps {
-  questionId: UniqueEntityID
-  authorId: UniqueEntityID
+  questionId: UniqueEntityId
+  authorId: UniqueEntityId
   author: string
   title: string
   content: string
   slug: Slug
   attachments: Attachment[]
-  bestAnswerId?: UniqueEntityID | null
+  bestAnswerId?: UniqueEntityId | null
   createdAt: Date
   updatedAt?: Date | null
 }

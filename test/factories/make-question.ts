@@ -7,15 +7,15 @@ import {
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { PrismaQuestionMapper } from '@/infra/database/prisma/mappers/prisma-question-mapper'
 import { Injectable } from '@nestjs/common'
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
 export function makeQuestion(
   override: Partial<QuestionProps> = {},
-  id?: UniqueEntityID,
+  id?: UniqueEntityId,
 ) {
     const question = Question.create(
       {
-          authorId: new UniqueEntityID(),
+          authorId: new UniqueEntityId(),
           title: faker.lorem.sentence(),
           content: faker.lorem.text(),
           ...override,

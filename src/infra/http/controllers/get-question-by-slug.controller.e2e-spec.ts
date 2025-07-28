@@ -8,7 +8,7 @@ import { AttachmentFactory } from 'test/factories/make-attachment'
 import { QuestionFactory } from 'test/factories/make-question'
 import { StudentFactory } from 'test/factories/make-student'
 import { QuestionAttachmentFactory } from '../../../../test/factories/make-question-attachment';
-import { DatabaseModule } from "@/infra/database/prisma/repositories/database.module";
+import { DatabaseModule } from "@/infra/database/database.module";
 
 describe('Get question by slug (E2E)', () => {
   let app: INestApplication
