@@ -1,29 +1,36 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
+import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory-question-comments-repository'
 import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question'
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'
-import {
-    InMemoryQuestionCommentRepository
-} from "../../../../../test/repositories/in-memory-question-comments-repository";
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
+import { InMemoryAttachmentsRepository } from '../../../../../test/repositories/in-memory-attachment-repository';
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
-let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentRepository
+let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let sut: CommentOnQuestionUseCase
 
 describe('Comment on Question', () => {
     beforeEach(() => {
         inMemoryQuestionAttachmentsRepository =
-            new InMemoryQuestionAttachmentsRepository()
+          new InMemoryQuestionAttachmentsRepository()
+        inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository()
+        inMemoryStudentsRepository = new InMemoryStudentsRepository()
         inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
-            inMemoryQuestionAttachmentsRepository,
+          inMemoryQuestionAttachmentsRepository,
+          inMemoryAttachmentsRepository,
+          inMemoryStudentsRepository,
         )
-        inMemoryQuestionCommentsRepository =
-            new InMemoryQuestionCommentRepository()
+        inMemoryQuestionCommentsRepository = new InMemoryQuestionCommentsRepository(
+          inMemoryStudentsRepository,
+        )
 
         sut = new CommentOnQuestionUseCase(
-            inMemoryQuestionsRepository,
-            inMemoryQuestionCommentsRepository,
+          inMemoryQuestionsRepository,
+          inMemoryQuestionCommentsRepository,
         )
     })
 
@@ -39,7 +46,7 @@ describe('Comment on Question', () => {
         })
 
         expect(inMemoryQuestionCommentsRepository.items[0].content).toEqual(
-            'Comentário teste',
+          'Comentário teste',
         )
     })
 })

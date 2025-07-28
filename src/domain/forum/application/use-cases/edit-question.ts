@@ -6,8 +6,8 @@ import { QuestionAttachmentList } from '@/domain/forum/enterprise/entities/quest
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
 import { Injectable } from '@nestjs/common'
 import { ResourceNotFoundError } from '@/domain/forum/application/use-cases/errors/resource-not-found';
-import { NotAllowedError } from '@/domain/forum/application/use-cases/errors/not-allowed';
-import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import { NotAllowedError } from "@/domain/forum/application/use-cases/errors/not-allowed";
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d'
 
 interface EditQuestionUseCaseRequest {
     authorId: string

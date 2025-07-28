@@ -1,26 +1,34 @@
+
 import { makeAnswer } from 'test/factories/make-answer'
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer'
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
-import {InMemoryAnswersRepository} from "../../../../../test/repositories/in-memory-answers.repository";
-import {InMemoryAnswersCommentRepository} from "../../../../../test/repositories/in-memory-answers-comments-repository";
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
+import {
+    InMemoryAnswerCommentsRepository
+} from '../../../../../test/repositories/in-memory-answers-comments-repository';
+import { InMemoryAnswersRepository } from '../../../../../test/repositories/in-memory-answers.repository';
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
-let inMemoryAnswerCommentsRepository: InMemoryAnswersCommentRepository
+let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let sut: CommentOnAnswerUseCase
 
 describe('Comment on Answer', () => {
     beforeEach(() => {
         inMemoryAnswerAttachmentsRepository =
-            new InMemoryAnswerAttachmentsRepository()
+          new InMemoryAnswerAttachmentsRepository()
+        inMemoryStudentsRepository = new InMemoryStudentsRepository()
         inMemoryAnswersRepository = new InMemoryAnswersRepository(
-            inMemoryAnswerAttachmentsRepository,
+          inMemoryAnswerAttachmentsRepository,
         )
-        inMemoryAnswerCommentsRepository = new InMemoryAnswersCommentRepository()
+        inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+          inMemoryStudentsRepository,
+        )
 
         sut = new CommentOnAnswerUseCase(
-            inMemoryAnswersRepository,
-            inMemoryAnswerCommentsRepository,
+          inMemoryAnswersRepository,
+          inMemoryAnswerCommentsRepository,
         )
     })
 
@@ -36,7 +44,7 @@ describe('Comment on Answer', () => {
         })
 
         expect(inMemoryAnswerCommentsRepository.items[0].content).toEqual(
-            'Comentário teste',
+          'Comentário teste',
         )
     })
 })

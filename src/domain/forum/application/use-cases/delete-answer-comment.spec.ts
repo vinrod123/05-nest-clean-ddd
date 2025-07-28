@@ -1,26 +1,23 @@
-import {beforeEach, describe, expect} from "vitest";
-import {InMemoryQuestionsRepository} from "../../../../../test/repositories/in-memory-questions-repository";
-import {UniqueEntityID} from "@/core/entities/unique-entity-i-d";
-import {makeQuestion} from "../../../../../test/factories/make-question";
-import {makeAnswer} from "../../../../../test/factories/make-answer";
-import {
-    InMemoryQuestionCommentRepository
-} from "../../../../../test/repositories/in-memory-question-comments-repository";
-import {CommentOnQuestionUseCase} from "@/domain/forum/application/use-cases/comment-on-question";
-import {DeleteQuestionUseCase} from "@/domain/forum/application/use-cases/delete-question";
-import {makeQuestionComment} from "../../../../../test/factories/make-question-comment";
-import {DeleteQuestionCommentUseCase} from "@/domain/forum/application/use-cases/delete-question-comment";
-import {InMemoryAnswersCommentRepository} from "../../../../../test/repositories/in-memory-answers-comments-repository";
-import {DeleteAnswerCommentUseCase} from "@/domain/forum/application/use-cases/delete-answer-comment";
-import {makeAnswerComment} from "../../../../../test/factories/make-answer-comment";
-import {NotAllowedError} from "@/domain/forum/application/use-cases/errors/not-allowed";
 
-let inMemoryAnswerCommentsRepository: InMemoryAnswersCommentRepository
+import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment'
+import { makeAnswerComment } from 'test/factories/make-answer-comment'
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
+import { UniqueEntityID } from '@/core/entities/unique-entity-i-d';
+import {
+    InMemoryAnswerCommentsRepository
+} from '../../../../../test/repositories/in-memory-answers-comments-repository';
+import { NotAllowedError } from '@/domain/forum/application/use-cases/errors/not-allowed';
+
+let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let sut: DeleteAnswerCommentUseCase
 
 describe('Delete Answer Comment', () => {
     beforeEach(() => {
-        inMemoryAnswerCommentsRepository = new InMemoryAnswersCommentRepository()
+        inMemoryStudentsRepository = new InMemoryStudentsRepository()
+        inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+          inMemoryStudentsRepository,
+        )
 
         sut = new DeleteAnswerCommentUseCase(inMemoryAnswerCommentsRepository)
     })

@@ -1,33 +1,38 @@
+import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
+import { Either, right } from '@/core/either'
+import { Injectable } from '@nestjs/common'
+import { CommentWithAuthor } from '../../enterprise/entities/value-objects/comment-with-author'
 
-import {QuestionComment} from "@/domain/forum/enterprise/entities/question-comment";
-import {QuestionCommentsRepository} from "@/domain/forum/application/repositories/question-comments-repository";
-import {Either, right} from "@/core/either";
-import { Injectable } from '@nestjs/common';
-
-interface FetchQuestionCommentsUseCaseRequest{
-    questionId: string
-    page: number
+interface FetchQuestionCommentsUseCaseRequest {
+  questionId: string
+  page: number
 }
 
-type FetchQuestionCommentsUseCaseResponse = Either<null, {
-    questionComments: QuestionComment[]
-}>
+type FetchQuestionCommentsUseCaseResponse = Either<
+  null,
+  {
+    comments: CommentWithAuthor[]
+  }
+>
 
 @Injectable()
-export class FetchQuestionCommentsUseCase{
-    constructor(
-        private questionCommentsRepository: QuestionCommentsRepository,
-    ){}
+export class FetchQuestionCommentsUseCase {
+  constructor(private questionCommentsRepository: QuestionCommentsRepository) {}
 
-    async execute({
-                      questionId,
-                      page
-                  } : FetchQuestionCommentsUseCaseRequest) : Promise<FetchQuestionCommentsUseCaseResponse>{
+  async execute({
+                  questionId,
+                  page,
+                }: FetchQuestionCommentsUseCaseRequest): Promise<FetchQuestionCommentsUseCaseResponse> {
+    const comments =
+      await this.questionCommentsRepository.findManyByQuestionIdWithAuthor(
+        questionId,
+        {
+          page,
+        },
+      )
 
-        const questionComments = await this.questionCommentsRepository.findManyByQuestionId(questionId, {page})
-        return right({
-            questionComments,
-        })
-
-    }
+    return right({
+      comments,
+    })
+  }
 }
