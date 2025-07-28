@@ -19,7 +19,7 @@ import { AnswerCommentsRepository } from '@/domain/forum/application/repositorie
 import { PrismaAnswerCommentsRepository } from '@/infra/database/prisma/repositories/prisma-answer-comments-repository';
 import {
   PrismaAnswerAttachmentsRepository
-} from '@/infra/database/prisma/repositories/prisma-answer--attachments-repository';
+} from '@/infra/database/prisma/repositories/prisma-answer-attachments-repository';
 import { AttachmentsRepository } from '@/domain/forum/application/repositories/attachments-repository';
 import { PrismaAttachmentsRepository } from '@/infra/database/prisma/repositories/prisma-attachment-repository';
 
